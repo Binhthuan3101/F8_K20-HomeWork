@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bài tập buổi 5</title>
+
+    <style>
+      .item {
+        display: inline-block;
+        margin: 15px;
+      }
+      .square {
+        width: 80px;
+        height: 80px;
+        border: 4px solid red;
+      }
+
+      .rectangle {
+        width: 100px;
+        height: 60px;
+        border: 4px solid blue;
+      }
+
+      .triangle-up {
+        width: 0;
+        height: 0;
+        border-width: 0 40px 70px 40px;
+        border-color: transparent transparent green transparent;
+        border-style: solid;
+      }
+      .triangle-down {
+        border-width: 70px 40px 0 40px;
+        border-style: solid;
+        border-color: rgb(237, 187, 22) transparent transparent transparent;
+        width: 0;
+        height: 0;
+      }
+
+      .triangle-left {
+        border-width: 40px 70px 40px 0;
+        border-style: solid;
+        border-color: transparent purple transparent transparent;
+        width: 0;
+        height: 0;
+      }
+      .triangle-right {
+        border-width: 40px 0 40px 70px;
+        border-style: solid;
+        border-color: transparent transparent transparent rgb(255, 151, 5);
+        width: 0;
+        height: 0;
+      }
+      .trapezoid {
+        border-width: 20px 30px 70px 30px;
+        border-color: transparent transparent rgb(72, 171, 135) transparent;
+        border-style: solid;
+        width: 100px;
+      }
+      .triangle-wide {
+        border-width: 0 70px 40px 70px;
+        border-style: solid;
+        border-color: transparent transparent rgb(23, 33, 40) transparent;
+        width: 0;
+        height: 0;
+      }
+      .triangle-sharp {
+        border-width: 0 20px 70px 20px;
+        border-style: solid;
+        border-color: transparent transparent rgb(176, 70, 4) transparent;
+        width: 0;
+        height: 0;
+      }
+      .triangle-equal {
+        border-width: 0 50px 70px 50px;
+        border-style: solid;
+        border-color: transparent transparent rgb(115, 48, 6) transparent;
+        width: 0;
+        height: 0;
+      }
+      .arrow-right {
+        border-width: 40px 0 40px 80px;
+        border-style: solid;
+        border-color: transparent transparent transparent rgb(15, 180, 174);
+        width: 0;
+        height: 0;
+      }
+      .arrow-left {
+        border-width: 40px 80px 40px 0;
+        border-style: solid;
+        border-color: transparent rgb(15, 180, 174) transparent transparent;
+        width: 0;
+        height: 0;
+      }
+      .ribbon {
+        width: 100px;
+        height: 0;
+
+        border-style: solid;
+        border-width: 30px 30px 30px 0;
+        border-color: red transparent red transparent;
+      }
+      /* ====================F8================== */
+      .f8 {
+        margin-top: 40px;
+        display: inline-block;
+      }
+
+      .f {
+        display: inline-block;
+        margin-right: 40px;
+        position: relative;
+      }
+      .f .col {
+        height: 120px;
+        width: 0;
+        border: 40px solid rgb(169, 49, 49);
+        border-right: none;
+      }
+      .f .top {
+        width: 80px;
+        height: 0;
+        border: 40px solid rgb(169, 49, 49);
+        border-bottom: none;
+        margin-bottom: -8px;
+      }
+      .f .mid {
+        width: 80px;
+        height: 0;
+        border: 40px solid rgb(169, 49, 49);
+        border-bottom: none;
+        position: absolute;
+        top: 40%;
+      }
+      .eight {
+        display: inline-block;
+        position: relative;
+      }
+
+      .eight .box {
+        width: 80px;
+        height: 60px;
+        border: 40px solid rgb(169, 49, 49);
+        margin-bottom: 10px;
+      }
+
+      .eight .box:first-child{
+        border-bottom: 20px solid rgb(169, 49, 49);
+        position: absolute;
+        top: -85px;
+      }
+      .eight .box:last-child{
+        position: ;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="item">
+        <div class="square"></div>
+        <p>1. Hình vuông</p>
+      </div>
+      <div class="item">
+        <div class="rectangle"></div>
+        <p>2. Hình chữ nhật</p>
+      </div>
+      <div class="item">
+        <div class="triangle-up"></div>
+        <p>3. Hình tam giác lên</p>
+      </div>
+      <div class="item">
+        <div class="triangle-down"></div>
+        <p>4. Hình tam giác xuống</p>
+      </div>
+      <div class="item">
+        <div class="triangle-left"></div>
+        <p>5. Tam giác trái</p>
+      </div>
+      <div class="item">
+        <div class="triangle-right"></div>
+        <p>6. Tam giác phải</p>
+      </div>
+      <div class="item">
+        <div class="trapezoid"></div>
+        <p>7. Hình thang</p>
+      </div>
+      <div class="item">
+        <div class="triangle-wide"></div>
+        <p>8. Tam giác rộng</p>
+      </div>
+      <div class="item">
+        <div class="triangle-sharp"></div>
+        <p>9. Tam giác nhọn</p>
+      </div>
+      <div class="item">
+        <div class="triangle-equal"></div>
+        <p>10. Tam giác cân</p>
+      </div>
+      <div class="item">
+        <div class="arrow-right"></div>
+        <p>11. Mũi tên phải</p>
+      </div>
+      <div class="item">
+        <div class="arrow-left"></div>
+        <p>12. Mũi tên trái</p>
+      </div>
+      <div class="item">
+        <div class="ribbon"></div>
+        <p>13. Ribbon/lá cờ</p>
+      </div>
+      <br>
+
+      <!-- ==========F8======= -->
+      <div class="f8">
+        <!-- F -->
+        <div class="f">
+          <div class="top"></div>
+          <div class="col"></div>
+          <div class="mid"></div>
+        </div>
+
+        <!-- 8 -->
+        <div class="eight">
+          <div class="box"></div>
+          <div class="box"></div>
+        </div>
+      </div>
+      <p>14. F8</p>
+    </div>
+  </body>
+</html>
