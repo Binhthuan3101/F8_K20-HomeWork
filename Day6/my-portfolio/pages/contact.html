@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact</title>
+    <!-- Link CSS -->
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <!-- Material Design Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css"
+    />
+  </head>
+  <body id="top">
+    <header>
+      <div class="container">
+        <!-- logo/Tên -->
+        <div class="logo">Đậu Bình Thuận</div>
+        <!-- Navigation menu -->
+        <nav>
+          <ul>
+            <li>
+              <a href="../index.html">
+                <i class="mdi mdi-home"></i>
+                Home
+              </a>
+            </li>
+            <li>
+              <a href="about.html">
+                <i class="mdi mdi-account"></i>
+                About
+              </a>
+            </li>
+            <li>
+              <a href="skills.html">
+                <i class="mdi mdi-lightbulb-on"></i>
+                Skills
+              </a>
+            </li>
+            <li>
+              <a href="projects.html">
+                <i class="mdi mdi-folder"></i>
+                Projects
+              </a>
+            </li>
+            <li>
+              <a href="blog.html">
+                <i class="mdi mdi-note-text"></i>
+                Blog
+              </a>
+            </li>
+            <li>
+              <a href="contact.html">
+                <i class="mdi mdi-card-account-phone"></i>
+                Contact
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Contact -->
+    <section>
+      <form action="#" method="post">
+        <fieldset>
+          <legend>Thông tin cá nhân</legend>
+
+          <!-- Name -->
+          <label for="fullname">Họ tên:</label>
+          <input
+            type="text"
+            id="fullname"
+            name="fullname"
+            required
+            minlength="2"
+            placeholder="Nhập tên"
+          />
+          <!-- Email -->
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+          <!-- Phone -->
+          <label for="phone">Số điện thoại:</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            pattern="[0-9]{10,11}"
+            required
+          />
+        </fieldset>
+
+        <!-- subject -->
+        <fieldset>
+          <legend>Chủ đề</legend>
+
+          <!-- Chọn chủ đề -->
+          <label for="subject">Chọn chủ đề:</label>
+          <select name="subject" id="subject" required>
+            <option value="">-- Chọn chủ đề --</option>
+            <option value="project">Hỏi về dự án</option>
+            <option value="cooperate">Hợp tác</option>
+            <option value="recruitment">Tuyển dụng</option>
+            <option value="other">Khác</option>
+          </select>
+        </fieldset>
+
+        <!-- priority -->
+        <fieldset>
+          <legend>Mức độ ưu tiên</legend>
+
+          <label>
+            <input type="radio" name="priority" />
+            Thấp
+          </label>
+          <label>
+            <input type="radio" name="priority" />
+            Trung bình
+          </label>
+          <label>
+            <input type="radio" name="priority" />
+            Cao
+          </label>
+        </fieldset>
+
+        <!-- Service -->
+        <fieldset>
+          <legend>Dịch vụ quan tâm</legend>
+
+          <label>
+            <input type="checkbox" name="service" />
+            Web Development
+          </label>
+          <label>
+            <input type="checkbox" name="service" />
+            Mobile App
+          </label>
+          <label>
+            <input type="checkbox" name="service" />
+            UI/UX Design
+          </label>
+          <label>
+            <input type="checkbox" name="service" />
+            Consulting
+          </label>
+        </fieldset>
+
+        <!-- Message -->
+        <fieldset>
+          <legend>Tin nhắn</legend>
+          <textarea
+            name="message"
+            id="message"
+            rows="6"
+            minlength="10"
+            required
+            placeholder="Nhập tin nhắn của bạn..."
+          ></textarea>
+        </fieldset>
+
+        <!-- web rating -->
+        <fieldset>
+          <legend>Đánh giá website</legend>
+          <label>
+            Đánh giá website này: 1-5 sao
+            <input type="range" min="1" max="5" value="5" />
+          </label>
+        </fieldset>
+
+        <!-- file Upload -->
+        <fieldset>
+          <label>
+            Đính kèm CV hoặc tài liệu (nếu có)
+            <input type="file" name="file" id="file" accept=".pdf,.doc,.docx" />
+          </label>
+        </fieldset>
+
+        <!-- terms -->
+        <fieldset>
+          <label>
+            <input type="checkbox" name="agree" required />
+            Tôi đồng ý với
+            <a href="#">Chính sách bảo mật</a>
+          </label>
+        </fieldset>
+
+        <!-- button -->
+        <button type="submit">Gửi tin nhắn</button>
+        <button type="reset">Xóa form</button>
+      </form>
+    </section>
+
+    <!-- contact info -->
+    <section>
+      <h2>Thông tin liên hệ</h2>
+      <address>
+        Email:
+        <a href="mailto:binhthuan3101@gmail.com">binhthuan3101@gmail.com</a>
+        <br />
+        Điện thoại:
+        <a href="tel:+84123456789">+84 123 456 789</a>
+        <br />
+        Địa chỉ: Hà Nội, Việt Nam.
+      </address>
+
+      <!-- Social Links -->
+      <div>
+        <a href="https://facebook.com">
+          <i class="mdi mdi-facebook"></i>
+          Facebook
+        </a>
+
+        <a href="https://instagram.com">
+          <i class="mdi mdi-instagram"></i>
+          Instagram
+        </a>
+
+        <a href="https://github.com">
+          <i class="mdi mdi-github"></i>
+          Github
+        </a>
+
+        <a href="https://linkedin.com">
+          <i class="mdi mdi-linkedin"></i>
+          LinkedIn
+        </a>
+      </div>
+    </section>
+
+    <!-- google map -->
+    <section>
+      <h2>Bản đồ</h2>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d14899.808282499816!2d105.8642597!3d20.9945583!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1svi!2s!4v1778240314051!5m2!1svi!2s"
+        width="100%"
+        height="450"
+        style="border: 0"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+      ></iframe>
+    </section>
+
+    <!-- Working hour -->
+    <section>
+      <h2>Giờ làm việc</h2>
+      <table border="1">
+        <tr>
+          <th>Ngày</th>
+          <th>Thời gian</th>
+        </tr>
+        <tr>
+          <td>Thứ 2 - Thứ 6</td>
+          <td>
+            <time>08:00</time>
+            -
+            <time>17:00</time>
+          </td>
+        </tr>
+        <tr>
+          <td>Thứ 7</td>
+          <td>
+            <time>08:00</time>
+            -
+            <time>12:00</time>
+          </td>
+        </tr>
+        <tr>
+          <td>Chủ nhật</td>
+          <td>Nghỉ</td>
+        </tr>
+      </table>
+    </section>
+    <!-- footer -->
+    <footer>
+      <p>&copy; 2026 Thuận Bình. All Rights Reserved.</p>
+      <!-- Social Media Links -->
+      <div>
+        <a href="https://www.facebook.com/">
+          <i class="mdi mdi-facebook"></i>
+          Facebook
+        </a>
+        <a href="https://www.instagram.com/">
+          <i class="mdi mdi-instagram"></i>
+          instagram
+        </a>
+        <a href="https://x.com/home">
+          <i class="mdi mdi-twitter"></i>
+          Twitter
+        </a>
+        <a href="https://github.com/">
+          <i class="mdi mdi-github"></i>
+          Github
+        </a>
+        <a href="https://vn.linkedin.com/">
+          <i class="mdi mdi-linkedin"></i>
+          LinkedIn
+        </a>
+      </div>
+      <!-- Back To Top -->
+      <a href="#top">Lên đầu trang</a>
+    </footer>
+  </body>
+</html>
