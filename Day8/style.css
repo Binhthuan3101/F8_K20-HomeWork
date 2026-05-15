@@ -171,7 +171,6 @@ body {
 
 .card-menu .elip {
   position: absolute;
-  z-index: 1;
   left: 50%;
   transform: translateX(-50%);
   background: rgba(255, 255, 255, 0.8);
@@ -181,15 +180,17 @@ body {
 .card-menu .elip1 {
   width: 500px;
   height: 500px;
-  bottom: -200px;
+  bottom: -250px;
   background: rgba(255, 255, 255, 0.05);
+  z-index: 2;
 }
 
 .card-menu .elip2 {
   width: 400px;
   height: 400px;
-  bottom: -230px;
+  bottom: -200px;
   background: rgba(255, 255, 255, 0.1);
+  z-index: 1;
 }
 
 .card-menu h2 {
@@ -234,12 +235,13 @@ body {
   display: grid;
   grid-template-columns: 20px 60px;
   align-items: center;
-  gap: 5px;
+  justify-items: center;
+  gap: 2px;
 }
 .card-menu .menu-item .menu-content .tag {
   display: inline-block;
   text-align: center;
-  padding: 2px;
+  padding:2px 10px;
   background-color: #d89f2d;
   color: #fff;
   border-radius: 5px;
@@ -247,11 +249,24 @@ body {
 }
 
 .card-menu .menu-item .menu-content .dotted {
-  width: 15px;
-  height: 15px;
-  background: #2ecc40;
-  border: 2px solid #fff;
+  width: 13px;
+  height: 13px;
+  background: #f2f4f2;
+  border: 2px solid green;
   border-radius: 2px;
+  position: relative;
+}
+
+.card-menu .menu-item .menu-content .dotted::before{
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: green;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .card-menu .menu-item .menu-content h3 {
