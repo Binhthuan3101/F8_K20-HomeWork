@@ -235,10 +235,10 @@ body {
 }
 .card-menu .menu-item .menu-content .status {
   display: grid;
-  grid-template-columns: 20px 60px;
+  grid-template-columns: 13px 50px;
   align-items: center;
   justify-items: center;
-  gap: 2px;
+  gap: 10px;
 }
 .card-menu .menu-item .menu-content .tag {
   display: inline-block;
