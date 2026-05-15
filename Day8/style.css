@@ -45,6 +45,7 @@ body {
   background: rgba(255, 255, 255, 0.15);
   top: 0;
   right: -130px;
+  z-index: 1;
 }
 .Cheeseburger img {
   position: absolute;
@@ -52,6 +53,7 @@ body {
   object-fit: cover;
   top: 20px;
   right: -80px;
+  z-index: 2;
 }
 
 .Cheeseburger .burger-content {
