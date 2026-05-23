@@ -17,10 +17,10 @@ body {
 }
 
 .heart-animation {
-    width: 100%;
-    height: 100%;
-    position: relative;
-  animation: heartbeat 2s linear infinite; 
+  width: 100%;
+  height: 100%;
+  position: relative;
+  animation: heartbeat 2s linear infinite;
 }
 
 @keyframes heartbeat {
@@ -34,7 +34,6 @@ body {
     transform: scale(1);
   }
 }
-
 
 .circle {
   width: 350px;
@@ -69,4 +68,3 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-
