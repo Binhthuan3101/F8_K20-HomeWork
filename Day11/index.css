@@ -177,6 +177,8 @@ body:has(#menu-toggle:checked) .overlay {
 }
 
 .container__sidebar {
+  position: relative;
+  z-index: 999;
   background-color: var(--sidebar-bg);
   color: white;
   padding: 2rem;
@@ -254,7 +256,7 @@ body:has(#menu-toggle:checked) .overlay {
     padding: 10px;
     border-bottom: 1px solid #ddd;
   }
-  .nav__link{
+  .nav__link {
     display: block;
   }
   .container {
@@ -296,7 +298,7 @@ body:has(#menu-toggle:checked) .overlay {
       right 0.3s ease,
       background-color 0.3s ease;
   }
-  
+
   #menu-toggle:checked ~ .header .header__hamburger {
     display: none;
   }
@@ -314,7 +316,8 @@ body:has(#menu-toggle:checked) .overlay {
     margin-bottom: 20px;
     padding: 10px;
     border-bottom: 1px solid #ddd;
-  }.nav__link{
+  }
+  .nav__link {
     display: block;
   }
 
