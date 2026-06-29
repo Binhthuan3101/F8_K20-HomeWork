@@ -12,74 +12,81 @@ numbers.shift();
 // delete numbers[1];
 console.log(numbers);
 
-
 // Duyệt mảng
 const numbers1 = [1, 2, 3, 4, 5, 6];
 for (const number of numbers1) {
-    console.log(number);
+  console.log(number);
 }
 
 numbers1.forEach((number) => {
-    console.log("Giá trị", number);
-    // console.log("Số thứ tự", index);
-    
+  console.log("Giá trị", number);
+  // console.log("Số thứ tự", index);
 });
 
 let items = ["bút", "sách", "vở", "Thước"];
 
-console.log(items.find((item) => {
-    if (item==="vở") {
-        return true;
+console.log(
+  items.find((item) => {
+    if (item === "vở") {
+      return true;
     }
     return false;
-}));
+  }),
+);
 
-console.log(items.findIndex(item=>item==="vở"));
+console.log(items.findIndex((item) => item === "vở"));
 console.log(items.includes("bút"));
 
-console.log(items.some(item => {
+console.log(
+  items.some((item) => {
     if (item === "vở") {
-        return true;
+      return true;
     }
     return false;
-}));
+  }),
+);
 
-
-console.log(items.every(item => {
+console.log(
+  items.every((item) => {
     if (item.length >= 2) {
-        return true;
+      return true;
     }
     return false;
-}));
-
+  }),
+);
 
 // lọc và biến đổi
 let scores = [45, 78, 90, 33, 62, 88];
 //lọc ra các điểm số lớn hơn 50
-console.log(scores.filter(score => {
+console.log(
+  scores.filter((score) => {
     return score > 50 ? true : false;
-}));
-
+  }),
+);
 
 //Cộng thêm 5 mỗi điểm
-console.log(scores.map(score => {
+console.log(
+  scores.map((score) => {
     return score + 5;
-}));
+  }),
+);
 
 //Phương thức sắp xếp mảng
 let names = ["Nam", "Anh", "Lan", "Bình"];
-console.log(
-names.sort()
-);
+console.log(names.sort());
 //sắp xếp mảng số theo thứ tự tăng dần
 let numbers2 = [5, 20, 1, 100, 3];
-console.log(numbers2.sort((a, b) => {
+console.log(
+  numbers2.sort((a, b) => {
     return a - b;
-}));
+  }),
+);
 //giảm dần
-console.log(numbers2.sort((a, b) => {
+console.log(
+  numbers2.sort((a, b) => {
     return b - a;
-}));
+  }),
+);
 //Đảo ngược
 console.log(numbers2.reverse());
 
@@ -104,9 +111,34 @@ const newFruits2 = fruits.concat(fruits2);
 console.log(newFruits2);
 
 //nối mảng thành chuỗi và ngược lại
+// nối chuỗi
 console.log("Danh sách các loại trái cây: ", fruits.join(", "));
 console.log(newFruits2.join(", "));
 
 const fruitsString = "banana, apple, orange, mango, kiwi, grape, pear";
-const fruitsArray = fruitsString.split(" ");
+// tách chuỗi thành mảng
+const fruitsArray = fruitsString.split(", ");
 console.log(fruitsArray);
+
+Array.prototype.includes2 = function (input) {
+  for (let i = 0; i < this.length; i++) {
+    if (Number.isNaN(input) && Number.isNaN(this[i])) return true;
+    if (this[i] === input) return true;
+  }
+  return false;
+};
+Array.prototype.forEach2 = function (callback) {
+  for (const item of this) {
+    callback(item, this.indexOf(item), this);
+  }
+};
+let colors = ["Red", "Green", "Blue", NaN];
+console.log(colors.includes2(NaN));
+console.log(colors.includes2("Green"));
+console.log(colors.includes2(123));
+
+
+
+colors.forEach2(function (color, index, original) {
+  console.log(color, index, original);
+});
