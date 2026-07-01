@@ -11,13 +11,8 @@ console.log(createSlug("iPhone 15 Pro Max!!!")); // "iphone-15-pro-max"
 console.log(createSlug("Hello   World"));//"hello---world"
 
 function generateOrderId(productName, quantity) {
-  return "ORD-".concat(
-    productName.slice(0, 3).toUpperCase(),
-    "-",
-    quantity,
-    "-",
-    productName.length,
-  );
+  return `ORD-${productName.slice(0, 3).toUpperCase()}-${quantity}-${productName.length}`
+    ;
 }
 
 console.log(generateOrderId("MacBook Pro", 2)); // "ORD-MAC-2-11"
