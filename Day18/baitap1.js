@@ -6,10 +6,7 @@ const examResults = [
 ];
 
 function getAverage(scores) {
-  let sum = 0;
-  for (const score of scores) {
-    sum += score;
-  }
+    const sum = scores.reduce((prev, curr) => prev + curr, 0);
   const average = (sum / scores.length).toFixed(1);
   return Number(average);
 }
