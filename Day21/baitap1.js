@@ -182,6 +182,8 @@ function MemberPaginator(resultList, soLuongMoiTrang) {
 
 console.log("--- KẾT QUẢ THỐNG KÊ CHI TIẾT ---");
 const result = getMemberFineStatistics(members, books, borrowRecords);
+console.log(result);
+
 console.log(JSON.stringify(result, null, 2));
 
 
