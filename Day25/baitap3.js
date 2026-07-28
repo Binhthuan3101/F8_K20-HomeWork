@@ -76,11 +76,10 @@ function renderApp() {
   } else {
     sortPriceBtn.textContent = "Sắp xếp theo giá";
   }
-
   resultCount.textContent = `Tìm thấy ${filteredProducts.length} sản phẩm`;
   productList.innerHTML = "";
   if (filteredProducts.length === 0) {
-    productList.innerHTML = `<p class="no-result">Không tim thấy sản phẩm nào phù hợp.</p>`;
+    productList.innerHTML = `<p class="no-result">Không tìm thấy sản phẩm nào phù hợp.</p>`;
     return;
   }
   filteredProducts.forEach((product) => {
