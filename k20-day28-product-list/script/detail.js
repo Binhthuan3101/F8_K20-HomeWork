@@ -6,7 +6,7 @@ const productContainer = document.querySelector("#product-detail");
 function showMessage(message) {
   if (productContainer) {
     productContainer.innerHTML = `
-        <div class="text-center text-white py-10 text-lg font-medium></div>`;
+        <div class="text-center text-white py-10 text-lg font-medium">${message}</div>`;
   }
 }
 
