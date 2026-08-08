@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tab component</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script
+      src="https://kit.fontawesome.com/ff53e92e9d.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="bg-slate-100 min-h-screen py-10 px-4">
+    <div
+      class="max-w-2xl mx-auto bg-white rounded-xl shadow-md overflow-hidden border border-slate-200"
+    >
+      <div id="tabs-container" class="outline-none" tabindex="0">
+        <div
+          class="flex justify-around border-b border-slate-200 bg-slate-50"
+          role="tablist"
+        >
+          <button
+            class="tab-btn rounded-lg py-3 px-4 text-center font-medium text-slate-600 hover:bg-slate-200 transition border-b-2 border-transparent"
+            data-tab="desc"
+          >
+            Mô tả
+          </button>
+          <button
+            class="tab-btn rounded-lg py-3 px-4 text-center font-medium text-slate-600 hover:bg-slate-200 transition border-b-2 border-transparent"
+            data-tab="specs"
+          >
+            Đánh giá
+          </button>
+          <button
+            class="tab-btn rounded-lg py-3 px-4 text-center font-medium text-slate-600 hover:bg-slate-200 transition border-b-2 border-transparent"
+            data-tab="reviews"
+          >
+            Thông số kỹ thuật
+          </button>
+          <button
+            class="tab-btn rounded-lg py-3 px-4 text-center font-medium text-slate-600 hover:bg-slate-200 transition border-b-2 border-transparent"
+            data-tab="comments"
+          >
+            Bình luận
+          </button>
+        </div>
+
+            <!-- Mô tả -->
+        <div class="p-6 text-slate-700 min-h-[220px]">
+          <div id="desc" class="tab-panel hidden space-y-2">
+            <h2 class="text-lg font-bold text-slate-800">Mô tả sản phẩm</h2>
+            <p>
+              Lập trình web hiện đại đòi hỏi khả năng xử lý DOM thuần thục. Sản
+              phẩm giúp nâng cao tư duy UI/UX chuyên nghiệp.
+            </p>
+          </div>
+
+          <!--Thông số kỹ thuật  -->
+          <div id="reviews" class="tab-panel hidden space-y-2">
+            <h2 class="text-lg font-bold text-slate-800">Thông số kỹ thuật</h2>
+            <ul class="list-disc list-inside space-y-1">
+              <li>Công nghệ: HTML5, Tailwind CSS, JavaScript (ES6+)</li>
+              <li>Chuẩn UI: Accessibility (a11y) Keyboard Navigation</li>
+              <li>Tối ưu performance: Event Listener Lifecycle</li>
+            </ul>
+          </div>
+
+        <!-- Đánh giá -->
+          <div id="specs" class="tab-panel hidden space-y-3">
+            <h2 class="text-lg font-bold text-slate-800 mb-2">
+              Đánh giá từ giảng viên
+            </h2>
+            <div
+              class="p-3 bg-amber-50 rounded border border-amber-300 text-amber-900 text-sm"
+            >
+              ⭐
+              <strong>5/5:</strong>
+              Code sạch, bắt đúng sự kiện bàn phím, đáp ứng chuẩn yêu cầu!
+            </div>
+          </div>
+
+        <!-- Bình luận -->
+          <div id="comments" class="tab-panel hidden space-y-4">
+            <h2 class="text-lg font-bold text-slate-800">Bình luận (2)</h2>
+
+            <!-- Danh sách bình luận -->
+            <div class="space-y-3">
+              <div
+                class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-sm"
+              >
+                <div class="flex justify-between items-center mb-1">
+                  <span class="font-semibold text-slate-800">Nguyễn Văn A</span>
+                  <span class="text-xs text-slate-400">10 phút trước</span>
+                </div>
+                <p class="text-slate-600">
+                  Bài tập này thiết kế giao diện Tailwind nhìn xịn thật!
+                </p>
+              </div>
+
+              <div
+                class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-sm"
+              >
+                <div class="flex justify-between items-center mb-1">
+                  <span class="font-semibold text-slate-800">Trần Thị B</span>
+                  <span class="text-xs text-slate-400">1 giờ trước</span>
+                </div>
+                <p class="text-slate-600">
+                  Phần điều khiển bằng bàn phím chuyển tab rất mượt nha.
+                </p>
+              </div>
+            </div>
+
+            <div class="flex gap-2 pt-2">
+              <input
+                type="text"
+                placeholder="Viết bình luận của bạn..."
+                class="flex-1 px-3 py-1.5 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              />
+              <button
+                class="px-4 py-1.5 bg-indigo-600 text-white rounded-lg text-sm font-medium hover:bg-indigo-700 transition"
+              >
+                <i class="fa-solid fa-paper-plane pointer-events-none"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang Quảng Cáo</title>
+    <script
+      src="https://kit.fontawesome.com/ff53e92e9d.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="p-6 bg-slate-100 flex justify-center items-center min-h-screen">
+    <div class="max-w-md w-full bg-white rounded-lg p-6 shadow-md space-y-5">
+      <h1 class="text-xl font-bold text-blue-600 text-center border-b pb-3">
+        Thông tin quảng cáo
+      </h1>
+      <div
+        id="campaign-content"
+        class="p-4 bg-slate-800 text-green-600 rounded border space-y-2"
+      >
+        <!-- kết quả ở đây -->
+      </div>
+      <div class="text-center pt-2">
+        <a
+          href="./index.html"
+          class="block  py-2 bg-green-700 text-white rounded hover:bg-green-400 transition"
+        >
+          <i class="fa-solid fa-arrow-left"></i>
+          Quay lại Trang Chủ
+        </a>
+      </div>
+    </div>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const source = params.get("utm_source");
+      const campaign = params.get("utm_campaign");
+      const contentBox = document.querySelector("#campaign-content");
+      console.log(source);
+      console.log(campaign);
+      if (!source || !campaign) {
+        contentBox.innerHTML = `<p class="text-red-500 font-bold text-center">Không có tham số quảng cáo</p>`;
+      } else {
+        contentBox.innerHTML=`
+        <p><b>Tên nguồn (utm_source): </b><span>${source}</span></p>
+        <p><b>Tên chiến dịch (utm_campaign): </b><span>${campaign}</span></p>
+        <img class=" w-full h-50 rounded-lg object-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRxLN9d8cPXpDQkAW4_cCOIDYb50OaPes8XUAR6Q-MjUg&s=10"/>
+        `
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script
+      src="https://kit.fontawesome.com/ff53e92e9d.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="bg-slate-50 min-h-screen py-10 px-4">
+    <div
+      class="max-w-xl mx-auto bg-white rounded-xl shadow-2xl p-6 border border-slate-200"
+    >
+      <h1 class="text-2xl font-bold text-purple-700 text-center mb-6">
+        <i class="fa-solid fa-list"></i>
+        Todo List
+      </h1>
+
+      <div class="mb-6">
+        <div class="flex gap-4 items-center">
+          <input
+            class="flex-1 px-2 py-1 border-[2px] border-slate-100 focus:outline-none focus:border-purple-600 rounded-md transition"
+            type="text"
+            id="todo-input"
+            placeholder="Nhập công việc cần làm..."
+          />
+          <button
+            id="add-btn"
+            class="px-4 py-1 bg-purple-800 rounded-lg text-white cursor-pointer font-bold transition-all duration-300 ease-in-out hover:opacity-65"
+          >
+            Thêm
+          </button>
+        </div>
+        <p id="input-error" class="text-red-500 text-sm mt-1 ml-1 hidden"></p>
+      </div>
+
+      <!-- Bộ lọc -->
+      <div
+        class="flex justify-center gap-2 mb-4 border-b pb-4 border-slate-200"
+      >
+        <button
+          data-filter="all"
+          class="filter-btn px-3 py-1.5 rounded-md text-sm font-medium bg-indigo-600 text-white shadow-sm transition"
+        >
+          Tất cả
+        </button>
+        <button
+          data-filter="active"
+          class="filter-btn px-3 py-1.5 rounded-md text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition"
+        >
+          Chưa hoàn thành
+        </button>
+        <button
+          data-filter="completed"
+          class="filter-btn px-3 py-1.5 rounded-md text-sm font-medium bg-slate-100 text-slate-600 hover:bg-slate-200 transition"
+        >
+          Hoàn thành
+        </button>
+      </div>
+
+      <!-- Danh sách todo -->
+      <ul id="todo-list" class="space-y-2 mb-6 min-h-[120px]"></ul>
+      <div class=" flex items-center justify-between pt-4 border-t border-slate-200 text-sm text-slate-600">
+        <span id="todo-stats">0/0 mục đã hoàn thành</span>
+        <button id="clear-completed-btn" class="hidden text-red-600 hover:text-red-700 font-medium transition hover:underline">Xóa tất cả</button>
+      </div>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>

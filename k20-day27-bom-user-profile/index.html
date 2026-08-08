@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Bài Tập BOM & Fingerprint</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script
+      src="https://kit.fontawesome.com/ff53e92e9d.js"
+      crossorigin="anonymous"
+    ></script>
+    <style type="text/tailwindcss">
+      @layer components {
+        .title {
+          @apply font-bold text-base text-black/70 py-3 border border-black/50 px-2 rounded-lg;
+        }
+        b {
+          @apply text-black text-base;
+        }
+        button[id^="btn-"] {
+          @apply cursor-pointer rounded-lg transition hover:opacity-80;
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 p-8 font-sans">
+    <div
+      class="max-w-2xl bg-purple-600 shadow-xl rounded-xl px-8 py-6 mx-auto space-y-6"
+    >
+      <!-- Thanh điều hướng nút bấm -->
+      <div class="flex gap-3">
+        <button
+          id="btn-home"
+          class="px-4 py-2 bg-blue-600 text-white font-medium"
+        >
+          Trang Chủ
+        </button>
+        <button
+          id="btn-fp"
+          class="px-4 py-2 bg-gray-200 text-gray-700 font-medium"
+        >
+          Trang Fingerprint
+        </button>
+      </div>
+
+      <!-- ================= 1. TRANG CHỦ ================= -->
+      <div id="page-home" class="space-y-8">
+        <!-- Khối hiển thị thông tin đọc từ BOM -->
+        <div class="bg-slate-200 p-5 rounded-xl shadow-xl space-y-4">
+          <h2 class="font-bold text-lg border-b pb-2">Thông tin từ BOM</h2>
+
+          <div class="flex items-center gap-2 title">
+            <span>Trạng thái:</span>
+            <span
+              id="dot"
+              class="w-3 h-3 rounded-full bg-green-500 inline-block"
+            ></span>
+            <b id="status-text" class="text-green-600">Online</b>
+          </div>
+
+          <p class="title">
+            Vị trí người dùng:
+            <b id="loc" class="text-black">Đang lấy...</b>
+          </p>
+          <p class="title">
+            Tên trình duyệt:
+            <b id="browser">--</b>
+          </p>
+          <p class="title">
+            Hệ điều hành:
+            <b id="os">--</b>
+          </p>
+          <p class="title">
+            Danh sách ngôn ngữ:
+            <b id="lang">--</b>
+          </p>
+          <p class="title">
+            Kích thước màn hình:
+            <b id="screen">--</b>
+          </p>
+          <p class="title">
+            Hướng màn hình:
+            <b id="orient">--</b>
+          </p>
+        </div>
+
+        <!-- Banner Quảng Cáo (dùng thẻ <a> reload trang) -->
+        <div>
+          <a
+            id="ad-banner"
+            href="#"
+            class="block hover:opacity-90 transition relative"
+          >
+            <h3
+              class="pointer-events-none text-base font-bold text-gray-600 mb-2 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
+            >
+              BANNER QUẢNG CÁO
+            </h3>
+
+            <img
+              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkqZhuE-s44DG0sALttyyD03sJX9W7XyMLXKi2rKNvMQ&s=10"
+              alt="campaign banner"
+              class="w-full h-48 object-cover rounded-xl"
+            />
+          </a>
+        </div>
+      </div>
+
+      <!-- ================= 2. TRANG FINGERPRINT (Mặc định ẩn) ================= -->
+      <div id="page-fp" class="hidden bg-white p-5 rounded shadow space-y-4">
+        <h2 class="font-bold text-lg border-b pb-2">Trang Fingerprint</h2>
+
+        <p class="text-sm text-gray-600">
+          Chuỗi fingerprint ghép từ dữ liệu trong
+          <code>history.state</code>
+          :
+        </p>
+
+        <div
+          id="fp-result"
+          class="p-3 bg-gray-900 text-green-400 font-mono text-sm rounded break-all"
+        >
+          Chưa có dữ liệu...
+        </div>
+
+        <button
+          id="btn-back"
+          class="px-4 py-2 bg-gray-600 text-white rounded transition-all hover:opacity-70"
+        >
+          <i class="fa-solid fa-arrow-left pointer-events-none"></i>Quay về trang chủ
+        </button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
