@@ -61,7 +61,7 @@ function renderDetail(product) {
             </div>
 
             <div class="pt-4 flex gap-4">
-                <button class="bg-purple-900 hover:bg-purple-800 text-white font-bold px-6 py-2 rounded-lg transition shadow">Thêm vào giỏ hàng</button>
+                <button class="bg-purple-900 hover:bg-purple-800 text-white font-bold px-6 py-2 rounded-lg transition shadow cursor-pointer">Thêm vào giỏ hàng</button>
                 <a href="./index.html" class="bg-gray-600 hover:bg-gray-500 text-white font-bold px-6 py-2 rounded-lg transition inline-flex items-center justify-center">Quay lại</a>
             </div>
         </div>
