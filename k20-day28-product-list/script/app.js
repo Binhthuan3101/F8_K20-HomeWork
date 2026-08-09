@@ -61,6 +61,7 @@ function render(data) {
   productList.innerHTML = html;
 }
 
+
 const fetchCategories = async () => {
   try {
     const res = await fetch("https://dummyjson.com/products/categories");
@@ -86,8 +87,8 @@ const fetchData = async () => {
     const body = await fetch("https://dummyjson.com/products?limit=100");
     const data = await body.json();
     products = data.products;
-      filteredProducts = [...products];
-      handleFilterAndSort();
+    filteredProducts = [...products];
+    handleFilterAndSort();
   } catch (error) {
     showStatus("Đã xảy ra lỗi khi tải dữ liệu. Vui lòng thử lại!");
   }
@@ -145,28 +146,26 @@ function updatePagination(totalItems) {
   }
 }
 
-
 btnSearch.addEventListener("click", handleFilterAndSort);
 textSearch.addEventListener("keydown", (e) => {
   if (e.key === "Enter") handleFilterAndSort();
 });
 
-
 categoryFilter.addEventListener("change", handleFilterAndSort);
 sortSelect.addEventListener("change", handleFilterAndSort);
 
 btnPrev.addEventListener("click", () => {
-    if (currentPage > 1) {
-        currentPage--;
-        renderCurrentPage();
-    }
+  if (currentPage > 1) {
+    currentPage--;
+    renderCurrentPage();
+  }
 });
 btnNext.addEventListener("click", () => {
-    const totalPages = Math.ceil(filteredProducts.length / limit);
-    if (currentPage < totalPages) {
-        currentPage++;
-        renderCurrentPage();
-    }
+  const totalPages = Math.ceil(filteredProducts.length / limit);
+  if (currentPage < totalPages) {
+    currentPage++;
+    renderCurrentPage();
+  }
 });
 fetchCategories();
 fetchData();
