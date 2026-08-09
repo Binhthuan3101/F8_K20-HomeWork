@@ -45,10 +45,10 @@ function render(data) {
                 <p class="font-bold text-base line-clamp-1">${product.title}</p>
                 <div class="flex items-center gap-2">
                     <p class="text-red-6 font-extrabold text-lg">$${salePrice}</p>
-                    <p class="text-gray-500 line-through text-xs">${product.price}</p>
+                    <p class="text-gray-500 line-through text-xs">$${product.price}</p>
                 </div>
                 <p class="text-xs text-red-500 font-semibold">Giảm: ${product.discountPercentage}%</p>  
-                <p class="text-xs text-amber-600 font-semibold">⭐ ${product.rating}</p>
+                <p class="text-xs text-amber-600 font-semibold"><i class="fa-solid fa-star"></i> ${product.rating}</p>
                 <p class="text-xs text-gray-600">Kho: ${product.stock}</p>  
             </div>
             <a href="./products-detail.html?id=${product.id}"
