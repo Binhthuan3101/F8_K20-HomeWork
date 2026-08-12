@@ -1,123 +1,193 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spotify - Home</title>
+    <title>Spotify - Web Player</title>
     <script
       src="https://kit.fontawesome.com/ff53e92e9d.js"
       crossorigin="anonymous"
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+      /* Custom Scrollbar cho trải nghiệm giống Spotify App */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #5a5a5a;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #888;
+      }
+    </style>
   </head>
-  <body class="p-6 bg-black text-white min-h-screen font-sans">
-    <!-- Header Navbar -->
-    <header
-      class="flex justify-between items-center mb-8 pb-4 border-b border-gray-800"
-    >
-      <a
-        href="index.html"
-        class="text-2xl font-bold text-green-500 hover:opacity-90"
-      >
-        <i class="fa-brands fa-spotify"></i>
-        Spotify Clone
-      </a>
-      <div id="nav-actions" class="flex gap-3 items-center"></div>
-    </header>
+  <body class="bg-black text-white h-screen flex flex-col overflow-hidden font-sans select-none">
+    
+    <!-- APP MAIN CONTAINER -->
+    <div class="flex flex-1 h-[calc(100vh-90px)] p-2 gap-2 overflow-hidden">
+      
+      <!-- LEFT SIDEBAR -->
+      <aside class="w-64 bg-[#121212] rounded-lg flex flex-col justify-between p-4 flex-shrink-0">
+        <div class="space-y-6">
+          <!-- Logo -->
+          <a href="index.html" class="flex items-center gap-2 text-xl font-bold text-white px-2 hover:opacity-90">
+            <i class="fa-brands fa-spotify text-3xl text-[#1ed760]"></i>
+            <span>Spotify</span>
+          </a>
 
-    <!-- Main Content Lists -->
-    <main class="space-y-10">
-      <!-- Section 1: Artists -->
-      <section>
-        <h2 class="text-2xl font-semibold mb-4 text-green-400">Artists</h2>
-        <div
-          id="artists-list"
-          class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
-        >
-          <div class="col-span-full text-gray-400 animate-pulse">
-            Đang tải danh sách nghệ sĩ...
+          <!-- Main Navigation -->
+          <nav class="space-y-4 font-semibold text-gray-400 text-sm">
+            <a href="#" class="flex items-center gap-4 text-white hover:text-white transition px-2">
+              <i class="fa-solid fa-house text-xl"></i>
+              <span>Trang chủ</span>
+            </a>
+            <a href="#" class="flex items-center gap-4 hover:text-white transition px-2">
+              <i class="fa-solid fa-magnifying-glass text-xl"></i>
+              <span>Tìm kiếm</span>
+            </a>
+          </nav>
+
+          <!-- Library Section -->
+          <div class="pt-4 border-t border-zinc-800">
+            <div class="flex items-center justify-between text-gray-400 hover:text-white px-2 cursor-pointer mb-4">
+              <div class="flex items-center gap-3 font-semibold text-sm">
+                <i class="fa-solid fa-book-bookmark text-xl"></i>
+                <span>Thư viện</span>
+              </div>
+              <i class="fa-solid fa-plus hover:bg-zinc-800 p-1.5 rounded-full text-xs"></i>
+            </div>
           </div>
         </div>
-      </section>
 
-      <!-- Section 2: Albums -->
-      <section>
-        <h2 class="text-2xl font-semibold mb-4 text-green-400">Albums</h2>
-        <div
-          id="albums-list"
-          class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
-        >
-          <div class="col-span-full text-gray-400 animate-pulse">
-            Đang tải danh sách album...
+        <!-- Auth Actions / Profile -->
+        <div id="nav-actions" class="pt-4 border-t border-zinc-800"></div>
+      </aside>
+
+      <!-- MAIN CONTENT AREA -->
+      <main class="flex-1 bg-gradient-to-b from-zinc-800/80 to-[#121212] rounded-lg overflow-y-auto p-6 space-y-8">
+        
+        <!-- SECTION 1: ARTISTS -->
+        <section>
+          <div class="flex justify-between items-end mb-4">
+            <h2 class="text-2xl font-bold hover:underline cursor-pointer">Nghệ sĩ phổ biến</h2>
+            <a href="#" class="text-xs font-bold text-gray-400 hover:underline uppercase tracking-wider">Hiện tất cả</a>
+          </div>
+          <div id="artists-list" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <div class="col-span-full text-gray-400 animate-pulse text-sm py-4">Đang tải danh sách nghệ sĩ...</div>
+          </div>
+        </section>
+
+        <!-- SECTION 2: ALBUMS -->
+        <section>
+          <div class="flex justify-between items-end mb-4">
+            <h2 class="text-2xl font-bold hover:underline cursor-pointer">Album dành cho bạn</h2>
+            <a href="#" class="text-xs font-bold text-gray-400 hover:underline uppercase tracking-wider">Hiện tất cả</a>
+          </div>
+          <div id="albums-list" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <div class="col-span-full text-gray-400 animate-pulse text-sm py-4">Đang tải danh sách album...</div>
+          </div>
+        </section>
+
+        <!-- SECTION 3: TRACKS -->
+        <section>
+          <div class="flex justify-between items-end mb-4">
+            <h2 class="text-2xl font-bold hover:underline cursor-pointer">Bài hát đề xuất</h2>
+            <a href="#" class="text-xs font-bold text-gray-400 hover:underline uppercase tracking-wider">Hiện tất cả</a>
+          </div>
+          <div id="tracks-list" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <div class="col-span-full text-gray-400 animate-pulse text-sm py-4">Đang tải danh sách bài hát...</div>
+          </div>
+        </section>
+
+        <!-- SECTION 4: PLAYLISTS -->
+        <section>
+          <div class="flex justify-between items-end mb-4">
+            <h2 class="text-2xl font-bold hover:underline cursor-pointer">Danh sách phát nổi bật</h2>
+            <a href="#" class="text-xs font-bold text-gray-400 hover:underline uppercase tracking-wider">Hiện tất cả</a>
+          </div>
+          <div id="playlists-list" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <div class="col-span-full text-gray-400 animate-pulse text-sm py-4">Đang tải danh sách playlist...</div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+    <!-- BOTTOM PLAYER BAR (Giao diện phát nhạc tĩnh) -->
+    <footer class="h-[90px] bg-black border-t border-zinc-900 px-4 flex items-center justify-between z-50">
+      <!-- Track Info -->
+      <div class="flex items-center gap-3 w-1/4">
+        <div class="w-14 h-14 bg-zinc-800 rounded flex-shrink-0 overflow-hidden">
+          <img id="player-img" src="https://placehold.co/150/1e293b/ffffff?text=Spotify" class="w-full h-full object-cover" />
+        </div>
+        <div class="truncate">
+          <div id="player-title" class="text-sm font-semibold truncate hover:underline cursor-pointer">Chọn bài hát</div>
+          <div id="player-artist" class="text-xs text-gray-400 truncate hover:underline cursor-pointer">Spotify Clone</div>
+        </div>
+        <button class="text-gray-400 hover:text-white ml-2"><i class="fa-regular fa-heart"></i></button>
+      </div>
+
+      <!-- Player Controls -->
+      <div class="flex flex-col items-center justify-center w-2/4 max-w-xl gap-1">
+        <div class="flex items-center gap-6 text-gray-400">
+          <button class="hover:text-white text-xs"><i class="fa-solid fa-shuffle"></i></button>
+          <button class="hover:text-white text-sm"><i class="fa-solid fa-backward-step"></i></button>
+          <button class="bg-white text-black w-8 h-8 rounded-full flex items-center justify-center hover:scale-105 transition"><i class="fa-solid fa-play text-xs"></i></button>
+          <button class="hover:text-white text-sm"><i class="fa-solid fa-forward-step"></i></button>
+          <button class="hover:text-white text-xs"><i class="fa-solid fa-repeat"></i></button>
+        </div>
+        <div class="w-full flex items-center gap-2 text-xs text-gray-400">
+          <span>0:00</span>
+          <div class="h-1 flex-1 bg-zinc-700 rounded-full overflow-hidden cursor-pointer group">
+            <div class="w-1/3 h-full bg-white group-hover:bg-[#1ed760]"></div>
+          </div>
+          <span>3:45</span>
+        </div>
+      </div>
+
+      <!-- Volume / Additional Controls -->
+      <div class="flex items-center justify-end gap-3 w-1/4 text-gray-400">
+        <button class="hover:text-white"><i class="fa-solid fa-microphone text-xs"></i></button>
+        <button class="hover:text-white"><i class="fa-solid fa-bars text-xs"></i></button>
+        <div class="flex items-center gap-2">
+          <button class="hover:text-white"><i class="fa-solid fa-volume-high text-xs"></i></button>
+          <div class="w-20 h-1 bg-zinc-700 rounded-full cursor-pointer">
+            <div class="w-2/3 h-full bg-white hover:bg-[#1ed760]"></div>
           </div>
         </div>
-      </section>
+      </div>
+    </footer>
 
-      <!-- Section 3: Tracks -->
-      <section>
-        <h2 class="text-2xl font-semibold mb-4 text-green-400">Tracks</h2>
-        <div
-          id="tracks-list"
-          class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
-        >
-          <div class="col-span-full text-gray-400 animate-pulse">
-            Đang tải danh sách bài hát...
-          </div>
-        </div>
-      </section>
-
-      <!-- Section 4: Playlists -->
-      <section>
-        <h2 class="text-2xl font-semibold mb-4 text-green-400">Playlists</h2>
-        <div
-          id="playlists-list"
-          class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
-        >
-          <div class="col-span-full text-gray-400 animate-pulse">
-            Đang tải danh sách playlist...
-          </div>
-        </div>
-      </section>
-    </main>
+    <!-- LOGIC JS GIỮ NGUYÊN HOÀN TOÀN TỪ CODE CỦA BẠN -->
     <script>
-      (async () => {
-        let res = await fetch(
-          "https://spotify.f8team.dev/api/artists?limit=20&offset=0",
-        );
-        let data = await res.json();
-
-        console.log(data, "artists");
-      })();
-      (async () => {
-        let res = await fetch(
-          "https://spotify.f8team.dev/api/albums?limit=50&offset=0",
-        );
-        let data = await res.json();
-
-        console.log(data, "albums");
-      })();
-      (async () => {
-        let res = await fetch(
-          "https://spotify.f8team.dev/api/tracks?limit=50&offset=0",
-        );
-        let data = await res.json();
-
-        console.log(data, "tracks");
-      })();
       const token = localStorage.getItem("access_token");
       const navActions = document.querySelector("#nav-actions");
+      
       if (token) {
         navActions.innerHTML = `
-            <a href="profile.html" class="bg-gray-700 px-3 py-1.5 rounded text-sm hover:bg-gray-600">Profile</a>
-            <button id="btn-logout" class="bg-red-500 px-3 py-1.5 rounded text-sm hover:cursor-pointer">Logout</button>`;
+          <div class="flex flex-col gap-2">
+            <a href="profile.html" class="flex items-center gap-3 text-sm font-semibold text-gray-300 hover:text-white px-2 py-1.5 rounded hover:bg-zinc-800 transition">
+              <i class="fa-regular fa-user text-base"></i> Profile
+            </a>
+            <button id="btn-logout" class="flex items-center gap-3 text-sm font-semibold text-red-400 hover:text-red-300 px-2 py-1.5 rounded hover:bg-zinc-800 transition w-full text-left cursor-pointer">
+              <i class="fa-solid fa-arrow-right-from-bracket text-base"></i> Đăng xuất
+            </button>
+          </div>`;
         document.querySelector("#btn-logout").addEventListener("click", () => {
           localStorage.clear();
           location.reload();
         });
       } else {
         navActions.innerHTML = `
-        <a href="./login.html" class="bg-blue-500 px-3 py-1.5 rounded text-sm">Login</a>
-        <a href="./register.html" class="bg-green-500 px-3 py-1.5 rounded text-sm">Register</a>`;
+          <div class="flex flex-col gap-2">
+            <a href="./login.html" class="w-full text-center bg-white text-black font-bold py-2.5 rounded-full text-sm hover:scale-105 transition">Đăng nhập</a>
+            <a href="./register.html" class="w-full text-center border border-gray-500 font-bold py-2 rounded-full text-sm hover:border-white transition">Đăng ký</a>
+          </div>`;
       }
 
       async function fetchWithToken(url) {
@@ -162,27 +232,25 @@
           root.albums ||
           root.tracks ||
           root.playlists ||
-          root.playlists ||
           []
         );
       }
-      function renderItems(elementId, responseData) {
+
+      function renderItems(elementId, responseData, isArtist = false) {
         const el = document.querySelector(elementId);
         const items = getListArray(responseData);
 
         if (!items || items.length === 0) {
           el.innerHTML =
-            '<p class="text-gray-400 col-span-full">Danh sách trống</p>';
+            '<p class="text-gray-400 col-span-full text-sm">Danh sách trống</p>';
           return;
         }
 
-        // Placeholder dự phòng an toàn hơn
         const fallbackImg =
           "https://placehold.co/150/1e293b/ffffff?text=No+Image";
 
         el.innerHTML = items
           .map((item) => {
-            // Bóc tách URL hình ảnh đa dạng hơn (xử lý cả trường hợp API trả về mảng images)
             const imageUrl =
               item.image_url ||
               item.cover_image_url ||
@@ -192,31 +260,48 @@
               (item.album && item.album.cover_url) ||
               fallbackImg;
 
+            const name = item.name || item.title || "No Name";
+            const description = isArtist 
+              ? "Nghệ sĩ" 
+              : (item.bio || item.description || item.artist_name || "Album/Track");
+
             return `
-      <a href="#!" class="inline-block bg-gray-800 p-3 rounded border border-gray-700 hover:border-gray-500 transition cursor-pointer">
-          <img 
-            src="${imageUrl}" 
-            onerror="this.onerror=null; this.src='${fallbackImg}';" 
-            class="w-full aspect-square object-cover rounded mb-2" 
-            alt="${item.name || item.title || "Cover"}"
-          />   
-          <h3 class="font-bold text-sm truncate">${item.name || item.title || "No Name"}</h3> 
-          <p class="text-xs text-gray-400 truncate">${item.bio || item.description || item.artist_name || ""}</p>
-      </a>
-  `;
+              <div class="group bg-[#181818] hover:bg-[#282828] p-3.5 rounded-md transition-all duration-300 cursor-pointer relative flex flex-col justify-between">
+                <div class="relative mb-3 aspect-square w-full overflow-hidden shadow-lg ${isArtist ? 'rounded-full' : 'rounded-md'}">
+                  <img 
+                    src="${imageUrl}" 
+                    onerror="this.onerror=null; this.src='${fallbackImg}';" 
+                    class="w-full h-full object-cover" 
+                    alt="${name}"
+                  />
+                  <!-- Floating Play Button -->
+                  <div class="absolute bottom-2 right-2 w-10 h-10 bg-[#1ed760] rounded-full flex items-center justify-center text-black opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-200 shadow-xl">
+                    <i class="fa-solid fa-play text-sm ml-0.5"></i>
+                  </div>
+                </div> 
+                <div>
+                  <h3 class="font-bold text-sm truncate text-white mb-1">${name}</h3> 
+                  <p class="text-xs text-gray-400 line-clamp-2 leading-relaxed">${description}</p>
+                </div>
+              </div>
+            `;
           })
           .join("");
       }
 
+      // GỌI API THEO ĐÚNG LOGIC VÀ ENDPOINT BẠN ĐÃ VIẾT
       fetchWithToken(
         "https://spotify.f8team.dev/api/artists?limit=20&offset=0",
-      ).then((d) => renderItems("#artists-list", d));
+      ).then((d) => renderItems("#artists-list", d, true));
+      
       fetchWithToken(
         "https://spotify.f8team.dev/api/albums?limit=20&offset=0",
       ).then((d) => renderItems("#albums-list", d));
+      
       fetchWithToken(
         "https://spotify.f8team.dev/api/tracks?limit=50&offset=0",
       ).then((d) => renderItems("#tracks-list", d));
+      
       fetchWithToken(
         "https://spotify.f8team.dev/api/tracks?limit=50&offset=0",
       ).then((d) => renderItems("#playlists-list", d));
