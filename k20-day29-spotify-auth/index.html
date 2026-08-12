@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spotify - Home</title>
+    <script
+      src="https://kit.fontawesome.com/ff53e92e9d.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="p-6 bg-black text-white min-h-screen font-sans">
+    <!-- Header Navbar -->
+    <header
+      class="flex justify-between items-center mb-8 pb-4 border-b border-gray-800"
+    >
+      <a
+        href="index.html"
+        class="text-2xl font-bold text-green-500 hover:opacity-90"
+      >
+        <i class="fa-brands fa-spotify"></i>
+        Spotify Clone
+      </a>
+      <div id="nav-actions" class="flex gap-3 items-center"></div>
+    </header>
+
+    <!-- Main Content Lists -->
+    <main class="space-y-10">
+      <!-- Section 1: Artists -->
+      <section>
+        <h2 class="text-2xl font-semibold mb-4 text-green-400">Artists</h2>
+        <div
+          id="artists-list"
+          class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
+        >
+          <div class="col-span-full text-gray-400 animate-pulse">
+            Đang tải danh sách nghệ sĩ...
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 2: Albums -->
+      <section>
+        <h2 class="text-2xl font-semibold mb-4 text-green-400">Albums</h2>
+        <div
+          id="albums-list"
+          class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
+        >
+          <div class="col-span-full text-gray-400 animate-pulse">
+            Đang tải danh sách album...
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Tracks -->
+      <section>
+        <h2 class="text-2xl font-semibold mb-4 text-green-400">Tracks</h2>
+        <div
+          id="tracks-list"
+          class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
+        >
+          <div class="col-span-full text-gray-400 animate-pulse">
+            Đang tải danh sách bài hát...
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Playlists -->
+      <section>
+        <h2 class="text-2xl font-semibold mb-4 text-green-400">Playlists</h2>
+        <div
+          id="playlists-list"
+          class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4"
+        >
+          <div class="col-span-full text-gray-400 animate-pulse">
+            Đang tải danh sách playlist...
+          </div>
+        </div>
+      </section>
+    </main>
+    <script>
+      (async () => {
+        let res = await fetch(
+          "https://spotify.f8team.dev/api/artists?limit=20&offset=0",
+        );
+        let data = await res.json();
+
+        console.log(data, "artists");
+      })();
+      (async () => {
+        let res = await fetch(
+          "https://spotify.f8team.dev/api/albums?limit=50&offset=0",
+        );
+        let data = await res.json();
+
+        console.log(data, "albums");
+      })();
+      (async () => {
+        let res = await fetch(
+          "https://spotify.f8team.dev/api/tracks?limit=50&offset=0",
+        );
+        let data = await res.json();
+
+        console.log(data, "tracks");
+      })();
+      const token = localStorage.getItem("access_token");
+      const navActions = document.querySelector("#nav-actions");
+      if (token) {
+        navActions.innerHTML = `
+            <a href="profile.html" class="bg-gray-700 px-3 py-1.5 rounded text-sm hover:bg-gray-600">Profile</a>
+            <button id="btn-logout" class="bg-red-500 px-3 py-1.5 rounded text-sm hover:cursor-pointer">Logout</button>`;
+        document.querySelector("#btn-logout").addEventListener("click", () => {
+          localStorage.clear();
+          location.reload();
+        });
+      } else {
+        navActions.innerHTML = `
+        <a href="./login.html" class="bg-blue-500 px-3 py-1.5 rounded text-sm">Login</a>
+        <a href="./register.html" class="bg-green-500 px-3 py-1.5 rounded text-sm">Register</a>`;
+      }
+
+      async function fetchWithToken(url) {
+        let res = await fetch(url, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+          },
+        });
+        if (res.status === 401) {
+          const refreshToken = localStorage.getItem("refresh_token");
+          if (refreshToken) {
+            const rfRes = await fetch(
+              "https://spotify.f8team.dev/api/auth/refresh-token",
+              {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ refresh_token: refreshToken }),
+              },
+            );
+            const rfData = await rfRes.json();
+            const newToken = rfData.access_token || rfData.data?.access_token;
+            if (newToken) {
+              localStorage.setItem("access_token", newToken);
+              res = await fetch(url, {
+                headers: { Authorization: `Bearer ${newToken}` },
+              });
+            }
+          }
+        }
+        return res.json();
+      }
+
+      function getListArray(responseData) {
+        if (!responseData) return [];
+        if (Array.isArray(responseData)) return responseData;
+
+        const root = responseData.data || responseData;
+        if (Array.isArray(root)) return root;
+
+        return (
+          root.artists ||
+          root.albums ||
+          root.tracks ||
+          root.playlists ||
+          root.playlists ||
+          []
+        );
+      }
+      function renderItems(elementId, responseData) {
+        const el = document.querySelector(elementId);
+        const items = getListArray(responseData);
+
+        if (!items || items.length === 0) {
+          el.innerHTML =
+            '<p class="text-gray-400 col-span-full">Danh sách trống</p>';
+          return;
+        }
+
+        // Placeholder dự phòng an toàn hơn
+        const fallbackImg =
+          "https://placehold.co/150/1e293b/ffffff?text=No+Image";
+
+        el.innerHTML = items
+          .map((item) => {
+            // Bóc tách URL hình ảnh đa dạng hơn (xử lý cả trường hợp API trả về mảng images)
+            const imageUrl =
+              item.image_url ||
+              item.cover_image_url ||
+              item.avatar ||
+              item.artist_image_url ||
+              (Array.isArray(item.images) && item.images[0]?.url) ||
+              (item.album && item.album.cover_url) ||
+              fallbackImg;
+
+            return `
+      <a href="#!" class="inline-block bg-gray-800 p-3 rounded border border-gray-700 hover:border-gray-500 transition cursor-pointer">
+          <img 
+            src="${imageUrl}" 
+            onerror="this.onerror=null; this.src='${fallbackImg}';" 
+            class="w-full aspect-square object-cover rounded mb-2" 
+            alt="${item.name || item.title || "Cover"}"
+          />   
+          <h3 class="font-bold text-sm truncate">${item.name || item.title || "No Name"}</h3> 
+          <p class="text-xs text-gray-400 truncate">${item.bio || item.description || item.artist_name || ""}</p>
+      </a>
+  `;
+          })
+          .join("");
+      }
+
+      fetchWithToken(
+        "https://spotify.f8team.dev/api/artists?limit=20&offset=0",
+      ).then((d) => renderItems("#artists-list", d));
+      fetchWithToken(
+        "https://spotify.f8team.dev/api/albums?limit=20&offset=0",
+      ).then((d) => renderItems("#albums-list", d));
+      fetchWithToken(
+        "https://spotify.f8team.dev/api/tracks?limit=50&offset=0",
+      ).then((d) => renderItems("#tracks-list", d));
+      fetchWithToken(
+        "https://spotify.f8team.dev/api/tracks?limit=50&offset=0",
+      ).then((d) => renderItems("#playlists-list", d));
+    </script>
+  </body>
+</html>

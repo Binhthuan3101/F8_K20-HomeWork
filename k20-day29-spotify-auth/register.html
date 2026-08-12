@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title>
+    <script
+      src="https://kit.fontawesome.com/ff53e92e9d.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- Sửa triệt để lỗi nền trắng khi nhập/autofill cho mọi trình duyệt -->
+    <style>
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
+        -webkit-text-fill-color: #d1d5db !important; /* text-gray-300 */
+        box-shadow: 0 0 0px 1000px transparent inset !important;
+        transition: background-color 50000s ease-in-out 0s !important;
+      }
+    </style>
+  </head>
+  <body
+    class="p-6 bg-black flex flex-col items-center justify-center min-h-screen"
+  >
+    <div class="p-6 rounded-lg max-w-100 w-full">
+      <h1
+        class="text-center flex flex-col items-center gap-3 text-[48px] mb-4 text-white font-bold"
+      >
+        <i class="fa-brands fa-spotify text-green-400"></i>
+        Đăng ký để bắt đầu nghe
+      </h1>
+      <form class="flex flex-col gap-4" id="form-register">
+        <input
+          class="bg-transparent border text-gray-300 border-gray-300 px-3 py-2 rounded focus:border-purple-700 focus:outline-none"
+          name="username"
+          placeholder="Username..."
+          required
+          type="text"
+        />
+        <input
+          class="bg-transparent border text-gray-300 border-gray-300 px-3 py-2 rounded focus:border-purple-700 focus:outline-none"
+          name="email"
+          placeholder="Email..."
+          required
+          type="email"
+        />
+        <input
+          class="bg-transparent border text-gray-300 border-gray-300 px-3 py-2 rounded focus:border-purple-700 focus:outline-none"
+          name="password"
+          placeholder="Password..."
+          required
+          type="password"
+        />
+        <input
+          class="bg-transparent border text-gray-300 border-gray-300 px-3 py-2 rounded focus:border-purple-700 focus:outline-none"
+          name="display_name"
+          placeholder="Display Name..."
+          type="text"
+        />
+        <input
+          class="bg-transparent border text-gray-300 border-gray-300 px-3 py-2 rounded focus:border-purple-700 focus:outline-none"
+          name="bio"
+          placeholder="Bio..."
+          type="text"
+        />
+        <select
+          class="bg-transparent border text-gray-300 border-gray-300 px-3 py-2 rounded focus:border-purple-700 focus:outline-none"
+          name="country"
+          id="country"
+        >
+          <option value="" disabled selected class="bg-gray-900 text-gray-400">
+            Country
+          </option>
+          <option value="VN" class="bg-gray-900 text-gray-300">Vietnam</option>
+          <option value="US" class="bg-gray-900 text-gray-300">
+            United States
+          </option>
+          <option value="TW" class="bg-gray-900 text-gray-300">Taiwan</option>
+          <option value="CHINA" class="bg-gray-900 text-gray-300">China</option>
+        </select>
+
+        <button
+          class="w-full bg-green-400 px-3 py-3 rounded-2xl hover:cursor-pointer font-bold text-black hover:bg-green-300 transition duration-200"
+          type="submit"
+        >
+          Tiếp theo
+        </button>
+      </form>
+      <p class="mt-4 text-center text-white">hoặc</p>
+      <p class="mt-4 flex flex-col gap-3 text-sm text-center text-gray-300">
+        Bạn đã có tài khoản?
+        <a href="login.html" class="text-white font-extrabold text-base">
+          Đăng nhập
+        </a>
+      </p>
+    </div>
+    <script>
+      const token = localStorage.getItem("access_token");
+      if (token) {
+        fetch("https://spotify.f8team.dev/api/users/me", {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.data || data.user || !data.error) {
+              window.location.href = "./index.html";
+            }
+          });
+      }
+
+      const formRegister = document.querySelector("#form-register");
+      formRegister.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(formRegister);
+        const data = Object.fromEntries(formData.entries());
+
+        fetch("https://spotify.f8team.dev/api/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            const resData = data.data || data;
+            if (resData.access_token) {
+              localStorage.setItem("access_token", resData.access_token);
+              localStorage.setItem("refresh_token", resData.refresh_token);
+              alert("Register successfully");
+            } else {
+              alert(data.message || data.error?.message || "Register failed");
+            }
+          })
+          .catch((err) => console.log(err));
+      });
+    </script>
+  </body>
+</html>

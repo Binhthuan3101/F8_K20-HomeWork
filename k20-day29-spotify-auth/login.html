@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script
+      src="https://kit.fontawesome.com/ff53e92e9d.js"
+      crossorigin="anonymous"
+    ></script>
+    <style>
+      input:-webkit-autofill,
+      input:-webkit-autofill:hover,
+      input:-webkit-autofill:focus,
+      input:-webkit-autofill:active {
+        -webkit-text-fill-color: #d1d5db !important; /* text-gray-300 */
+        box-shadow: 0 0 0px 1000px transparent inset !important;
+        transition: background-color 50000s ease-in-out 0s !important;
+      }
+    </style>
+  </head>
+  <body
+    class="p-6 bg-black flex flex-col items-center justify-center min-h-screen"
+  >
+    <div class="p-6 rounded-lg max-w-100 w-full">
+      <h1
+        class="text-center flex flex-col items-center gap-3 text-[48px] mb-4 text-white font-bold"
+      >
+        <i class="fa-brands fa-spotify text-green-400"></i>
+        Đăng nhập để bắt đầu nghe
+      </h1>
+      <form method="POST" class="flex flex-col gap-4" id="form-login">
+        <input
+          class="bg-transparent border text-gray-300 border-gray-300 px-3 py-2 rounded focus:border-purple-700 focus:outline-none"
+          name="email"
+          placeholder="Email..."
+          type="email"
+        />
+        <input
+          class="bg-transparent border text-gray-300 border-gray-300 px-3 py-2 rounded focus:border-purple-700 focus:outline-none"
+          name="password"
+          placeholder="Password..."
+          type="password"
+        />
+
+        <button
+          class="w-full bg-green-400 px-3 py-3 rounded-2xl hover:cursor-pointer font-bold text-black hover:bg-green-300 transition duration-200"
+          type="submit"
+        >
+          Tiếp theo
+        </button>
+      </form>
+      <p class="mt-4 text-center text-white">hoặc</p>
+      <p class="mt-4 flex flex-col gap-3 text-sm text-center text-gray-300">
+        Bạn chưa có tài khoản?
+        <a href="./register.html" class="text-white font-extrabold text-base">
+          Đăng ký
+        </a>
+      </p>
+    </div>
+    <script>
+      const token = localStorage.getItem("access_token");
+      if (token) {
+        fetch("https://spotify.f8team.dev/api/users/me", {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.data || data.user || !data.error) {
+              window.location.href = "./index.html";
+            }
+          });
+      }
+
+      const formLogin = document.querySelector("#form-login");
+      formLogin.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(formLogin));
+        console.log("Data", data);
+        fetch("https://spotify.f8team.dev/api/auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            const resData = data.data || data;
+            if (resData.access_token) {
+              localStorage.setItem("access_token", resData.access_token);
+              localStorage.setItem("refresh_token", resData.refresh_token);
+              alert("Login successfully");
+              window.location.href = "./index.html";
+            } else {
+              alert(
+                data.message || data.error?.message || "Invalid credentials",
+              );
+            }
+          })
+          .catch((err) => console.log(err));
+      });
+    </script>
+  </body>
+</html>

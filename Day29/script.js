@@ -54,7 +54,7 @@
 const formLogin = document.querySelector("#form-login");
 formLogin.addEventListener("submit", (e) => {
   e.preventDefault();
-  const formData = new FormData(e.target);
+  const formData = new FormData(formLogin);
   const data = Object.fromEntries(formData.entries());
   fetch("https://spotify.f8team.dev/api/auth/login", {
     method: "POST",
