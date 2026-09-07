@@ -19,7 +19,7 @@ const ProductItem = ({ product, onAddToCart }) => {
         {inStock && discountPercent > 0 && (
           <Badge type="discount" text={`Giảm ${discountPercent}%`} />
         )}
-        <img src={image} alt={name} className="w-full object-cover h-full" />
+        <img src={image} alt={name} className="w-full object-cover h-40" />
       </div>
 
       <div className="p-4 flex flex-col flex-grow gap-2">
