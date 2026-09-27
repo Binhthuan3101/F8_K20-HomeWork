@@ -9,7 +9,7 @@ function App() {
     <div className="max-w-5xl mx-auto px-4 py-8">
       <Header />
 
-      <div className="flex justify-center mb-8 border-b border-slate-200">
+      <div className="flex justify-center mb-8 ">
         <nav className="flex space-x-4">
           <button
             onClick={() => setActiveTab("ex1")}
