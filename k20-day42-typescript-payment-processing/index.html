@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="vi" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Module Xử Lý Thanh Toán - TypeScript</title>
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body class="bg-slate-950 text-slate-100 min-h-screen py-10 px-4">
+    <main class="max-w-xl mx-auto space-y-6">
+      <!-- Tiêu đề -->
+      <h1 class="text-2xl font-bold text-center text-blue-400 tracking-wide">
+        💳 Module Xử Lý Thanh Toán Đơn Hàng
+      </h1>
+
+      <!-- SECTION 1: FORM THANH TOÁN -->
+      <section
+        class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl"
+      >
+        <h2
+          class="text-lg font-semibold text-slate-200 border-b border-slate-800 pb-3 mb-4"
+        >
+          Tạo Đơn Thanh Toán
+        </h2>
+
+        <form id="payment-form" class="space-y-4">
+          <div>
+            <label
+              for="order-id"
+              class="block text-sm font-medium text-slate-400 mb-1.5"
+            >
+              Mã đơn hàng (Order ID):
+            </label>
+            <input
+              type="number"
+              id="order-id"
+              placeholder="VD: 1001"
+              class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2.5 text-slate-100 focus:outline-none focus:border-blue-500 transition"
+            />
+          </div>
+
+          <div>
+            <label
+              for="amount"
+              class="block text-sm font-medium text-slate-400 mb-1.5"
+            >
+              Số tiền (VNĐ):
+            </label>
+            <input
+              type="number"
+              id="amount"
+              placeholder="VD: 250000"
+              class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2.5 text-slate-100 focus:outline-none focus:border-blue-500 transition"
+            />
+          </div>
+
+          <div>
+            <label
+              for="payment-method"
+              class="block text-sm font-medium text-slate-400 mb-1.5"
+            >
+              Phương thức thanh toán:
+            </label>
+            <select
+              id="payment-method"
+              class="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-2.5 text-slate-100 focus:outline-none focus:border-blue-500 transition"
+            >
+              <option value="">-- Chọn phương thức --</option>
+              <option value="COD">Thanh toán khi nhận hàng (COD)</option>
+              <option value="BANK_TRANSFER">Chuyển khoản ngân hàng</option>
+              <option value="E_WALLET">Ví điện tử</option>
+              <option value="INVALID_METHOD">
+                Phương thức không hợp lệ (Test Guard)
+              </option>
+            </select>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 rounded-lg shadow-lg shadow-blue-600/20 transition duration-200 cursor-pointer"
+          >
+            Thanh Toán
+          </button>
+        </form>
+
+        <!-- Thông báo lỗi & Kết quả -->
+        <div
+          id="form-error"
+          class="hidden mt-4 p-3.5 bg-red-950/80 border border-red-800/60 rounded-lg text-red-300 text-sm"
+        ></div>
+        <div id="payment-result" class="hidden mt-4"></div>
+      </section>
+
+      <!-- SECTION 2: TRA CỨU BIÊN NHẬN -->
+      <section
+        class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl"
+      >
+        <h2
+          class="text-lg font-semibold text-slate-200 border-b border-slate-800 pb-3 mb-4"
+        >
+          🔍 Tra Cứu Biên Nhận
+        </h2>
+
+        <form id="search-form" class="flex gap-2.5">
+          <input
+            type="number"
+            id="search-receipt-id"
+            placeholder="Nhập mã biên nhận (ID)..."
+            class="flex-1 bg-slate-950 border border-slate-700 rounded-lg px-4 py-2.5 text-slate-100 focus:outline-none focus:border-blue-500 transition"
+          />
+          <button
+            type="submit"
+            class="bg-slate-700 hover:bg-slate-600 text-white font-semibold px-5 py-2.5 rounded-lg transition duration-200 cursor-pointer whitespace-nowrap"
+          >
+            Tìm
+          </button>
+        </form>
+
+        <div id="search-result" class="hidden mt-4"></div>
+      </section>
+
+      <!-- SECTION 3: DANH SÁCH BIÊN NHẬN -->
+      <section
+        class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl"
+      >
+        <h2
+          class="text-lg font-semibold text-slate-200 border-b border-slate-800 pb-3 mb-4"
+        >
+          📜 Danh Sách Biên Nhận Đã Tạo
+        </h2>
+        <div id="receipts-list" class="space-y-3">
+          <p class="text-slate-500 italic text-center py-4">
+            Chưa có biên nhận nào được tạo.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
