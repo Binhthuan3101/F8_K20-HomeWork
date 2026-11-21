@@ -16,6 +16,7 @@ export default function HomePage() {
           width={720}
           height={405}
           priority
+          className="w-auto h-auto"
         />
       </div>
       <Link
