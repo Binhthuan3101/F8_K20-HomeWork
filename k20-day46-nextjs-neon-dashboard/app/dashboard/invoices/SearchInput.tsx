@@ -8,7 +8,6 @@ export default function SearchInput({
 }: {
   initialSearch: string;
 }) {
-  const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
 
@@ -23,7 +22,7 @@ export default function SearchInput({
 
     if (trimmed) {
       params.set("search", nextValue);
-    } else {
+    } else { 
       params.delete("search");
     }
     params.delete("page");
