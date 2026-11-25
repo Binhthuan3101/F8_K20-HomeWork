@@ -71,7 +71,15 @@ export default async function InvoicesPage({
     <section className="space-y-4">
       <h1 className="text-2xl font-bold">Hóa đơn</h1>
 
-      <SearchInput initialSearch={search} />
+      <div className="flex gap-2 items-center">
+        <SearchInput initialSearch={search} />
+        <Link
+          className="px-5 py-1 bg-amber-500 rounded"
+          href="/dashboard/invoices/create"
+        >
+          Tạo
+        </Link>
+      </div>
 
       <Suspense
         fallback={

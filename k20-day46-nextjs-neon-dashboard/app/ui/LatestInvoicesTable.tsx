@@ -1,8 +1,10 @@
 "use client";
 import React from "react";
-import { LatestInvoice } from "../data";
+import { InvoiceRow, LatestInvoice } from "../data";
 import Table, { ColumnsType } from "antd/es/table";
-import { ConfigProvider, Tag, theme } from "antd";
+import { Button, ConfigProvider, message, Popconfirm, Space, Tag, theme } from "antd";
+import Link from "next/link";
+import { deletedInvoice } from "../action";
 
 interface LatestInvoicesTableProps {
   invoices: LatestInvoice[];
@@ -10,6 +12,14 @@ interface LatestInvoicesTableProps {
 export default function LatestInvoicesTable({
   invoices,
 }: LatestInvoicesTableProps) {
+  const handleDelete = async (id: number) => {
+    try {
+      await deletedInvoice(id);
+    message.success("Xóa hóa đơn thành công!")
+    } catch (error) {
+      message.error("Lỗi khi xóa hóa đơn!")
+    }
+  };
   const columns: ColumnsType<LatestInvoice> = [
     {
       title: "ID",
@@ -57,15 +67,42 @@ export default function LatestInvoicesTable({
         return new Date(date).toLocaleDateString("vi-VN");
       },
     },
+    {
+      title: "Hành động",
+      key: "actions",
+      render(_, record: InvoiceRow) {
+        return (
+          <Space>
+            <Link href={`/dashboard/invoices/${record.id}/edit`}>
+              <Button size="small" type="default">
+                Sửa
+              </Button>
+            </Link>
+
+            <Popconfirm
+              title="Xóa hóa đơn này?"
+              description="Hành động này không thể hoàn tác."
+              onConfirm={() => handleDelete(record.id)}
+              okText="Xóa"
+              cancelText="Hủy"
+            >
+              <Button size="small" danger>
+                Xóa
+              </Button>
+            </Popconfirm>
+          </Space>
+        );
+      },
+    },
   ];
   return (
-    <ConfigProvider theme={{algorithm:theme.darkAlgorithm}}>
-        <Table
-          dataSource={invoices}
-          columns={columns}
-          rowKey={"id"}
-          pagination={false}
-        />
+    <ConfigProvider theme={{ algorithm: theme.darkAlgorithm }}>
+      <Table
+        dataSource={invoices}
+        columns={columns}
+        rowKey={"id"}
+        pagination={false}
+      />
     </ConfigProvider>
   );
 }

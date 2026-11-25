@@ -23,6 +23,10 @@ export type CustomerRow = {
   name: string;
 };
 
+export type Customers = {
+  id: number;
+  name: string;
+};
 export async function fetchLatestInvoice(): Promise<LatestInvoice[]> {
   const data =
     await sql`SELECT invoices.id,customers.name AS customer_name, invoices.amount,invoices.status,invoices.date FROM invoices JOIN customers ON invoices.customer_id=customers.id ORDER BY invoices.date DESC, invoices.id DESC LIMIT 5`;
@@ -49,4 +53,9 @@ export async function fetchTotalPage(search: string): Promise<number> {
     await sql`SELECT COUNT(*) AS total FROM invoices JOIN customers ON invoices.customer_id=customers.id WHERE customers.name ILIKE ${`%${search}%`}`;
   const totalInvoices = Number(data[0].total);
   return Math.ceil(totalInvoices / ITEMS_PER_PAGE);
+}
+
+export async function fetchCustomers(): Promise<Customers[]> {
+  const data = await sql`SELECT id,name FROM customers`;
+  return data as Customers[];
 }
