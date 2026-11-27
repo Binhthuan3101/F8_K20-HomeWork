@@ -55,7 +55,6 @@ async function InvoicesTableSection({
     </div>
   );
 }
-export const dynamic = 'force-dynamic';
 
 
 export default async function InvoicesPage({

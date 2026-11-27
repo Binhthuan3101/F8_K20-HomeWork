@@ -10,7 +10,6 @@ async function LatestInvoicesSection() {
   return <LatestInvoicesTable invoices={latestInvoices} />;
 }
 
-export const dynamic = "force-dynamic";
 
 export default async function DashboardPage() {
   return (
