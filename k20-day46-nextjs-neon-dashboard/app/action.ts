@@ -12,7 +12,7 @@ export async function createInvoice(data: {
   status: string;
 }) {
   const { customerId, amount, status } = data;
-  const date = new Date().toISOString().split("T");
+  const date = new Date().toISOString().split("T")[0];
 
   await sql`
     INSERT INTO invoices (id, customer_id, amount, status, date)
@@ -32,12 +32,10 @@ export async function getInvoice(id: number): Promise<InvoiceFormData> {
   const data = await sql`
     SELECT 
       invoices.id, 
-      customers.name AS customer_name, 
+      invoices.customer_id AS "customerId",
       invoices.amount, 
-      invoices.status, 
-      invoices.date 
+      invoices.status
     FROM invoices
-    JOIN customers ON invoices.customer_id = customers.id
     WHERE invoices.id = ${id}
   `;
 

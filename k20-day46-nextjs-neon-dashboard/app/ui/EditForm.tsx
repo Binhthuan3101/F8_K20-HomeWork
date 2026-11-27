@@ -9,7 +9,6 @@ import {
   Select,
   Switch,
   theme,
-  message,
 } from "antd";
 import React from "react";
 import { useRouter } from "next/navigation";
@@ -18,7 +17,6 @@ import { Customers, InvoiceFormData } from "../data";
 import { schemaForm } from "./schemaForm";
 import { updateInvoices } from "../action";
 
-// Tự động lấy kiểu từ schemaForm (customerId: number, amount: number) và đổi status thành boolean cho Switch
 type FormValues = Omit<z.infer<typeof schemaForm>, "status"> & {
   status: boolean;
 };
@@ -32,6 +30,7 @@ function EditInvoiceForm({
 }) {
   const [form] = Form.useForm<FormValues>();
   const router = useRouter();
+  const { message } = App.useApp();
 
   const zodRule = (fieldName: keyof typeof schemaForm.shape) => ({
     validator(_: unknown, value: unknown) {
@@ -48,12 +47,13 @@ function EditInvoiceForm({
       const payload = {
         customerId: values.customerId,
         amount: values.amount,
-        status: values.status ? "paid" : "pending",
+        status: (values.status ? "paid" : "pending") as "paid" | "pending",
       };
 
       await updateInvoices(invoice.id, payload);
       message.success("Cập nhật hóa đơn thành công!");
       router.push("/dashboard/invoices");
+      router.refresh();
     } catch (error) {
       message.error("Có lỗi xảy ra khi cập nhật!");
     }
@@ -65,7 +65,6 @@ function EditInvoiceForm({
       layout="vertical"
       onFinish={handleUpdate}
       initialValues={{
-        // Đảm bảo tên trường này (customerId hoặc customer_id) khớp với type InvoiceFormData của bạn
         customerId: invoice.customerId,
         amount: invoice.amount,
         status: invoice.status === "paid",
