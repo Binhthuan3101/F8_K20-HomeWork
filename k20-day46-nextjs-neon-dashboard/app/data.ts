@@ -18,6 +18,12 @@ export type InvoiceRow = {
   status: string;
   date: string | Date;
 };
+export type InvoiceFormData = {
+  id: number;
+  customerId: number;
+  amount: number;
+  status: string;
+};
 
 export type CustomerRow = {
   name: string;

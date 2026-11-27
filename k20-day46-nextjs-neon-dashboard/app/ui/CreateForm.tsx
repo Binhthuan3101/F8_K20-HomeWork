@@ -7,18 +7,30 @@ import {
   Button,
   ConfigProvider,
   Form,
-  Input,
+  InputNumber,
   Radio,
   Select,
   theme,
 } from "antd";
 import { createInvoice } from "../action";
+import { schemaForm } from "./schemaForm";
 
 function InvoiceForm({ customers }: { customers: Customers[] }) {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { message } = App.useApp();
+
+  // Kết nối Zod schemaForm vào rules của từng ô Form.Item
+  const zodRule = (fieldName: keyof typeof schemaForm.shape) => ({
+    validator(_: unknown, value: unknown) {
+      const result = schemaForm.shape[fieldName].safeParse(value);
+      if (result.success) {
+        return Promise.resolve();
+      }
+      return Promise.reject(new Error(result.error.issues[0]?.message));
+    },
+  });
 
   const handleSubmit = async (values: {
     customerId: number;
@@ -43,12 +55,13 @@ function InvoiceForm({ customers }: { customers: Customers[] }) {
         form={form}
         onFinish={handleSubmit}
         layout="vertical"
-        initialValues={{ amount: 0, status: "paid" }}
+        // Để trống amount ban đầu (hoặc đặt > 0) để không vi phạm rule .gt(0) của Zod
+        initialValues={{ status: "paid" }}
       >
         <Form.Item
           label="Tên khách hàng"
           name="customerId"
-          rules={[{ required: true, message: "Vui lòng chọn khách hàng!" }]}
+          rules={[zodRule("customerId")]}
         >
           <Select
             placeholder="Chọn một khách hàng"
@@ -59,19 +72,18 @@ function InvoiceForm({ customers }: { customers: Customers[] }) {
           />
         </Form.Item>
 
-        <Form.Item
-          label="Tiền"
-          name="amount"
-          rules={[{ required: true, message: "Vui lòng nhập số tiền!" }]}
-        >
-          <Input type="number" placeholder="Enter amount..." />
+        <Form.Item label="Tiền (VND)" name="amount" rules={[zodRule("amount")]}>
+          <InputNumber
+            style={{ width: "100%" }}
+            placeholder="Nhập số tiền..."
+          />
         </Form.Item>
 
-        <Form.Item label="Trạng thái" name="status">
+        <Form.Item label="Trạng thái" name="status" rules={[zodRule("status")]}>
           <Radio.Group
             options={[
-              { label: "paid", value: "paid" },
-              { label: "pending", value: "pending" },
+              { label: "Paid", value: "paid" },
+              { label: "Pending", value: "pending" },
             ]}
           />
         </Form.Item>
@@ -81,8 +93,7 @@ function InvoiceForm({ customers }: { customers: Customers[] }) {
             Create Invoice
           </Button>
         </Form.Item>
-          </Form>
-          
+      </Form>
     </div>
   );
 }

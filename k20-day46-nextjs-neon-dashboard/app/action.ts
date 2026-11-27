@@ -2,6 +2,7 @@
 
 import { neon } from "@neondatabase/serverless";
 import { revalidatePath } from "next/cache";
+import { InvoiceFormData, InvoiceRow, LatestInvoice } from "./data";
 
 const sql = neon(process.env.DATABASE_URL!);
 
@@ -27,20 +28,45 @@ export async function createInvoice(data: {
   revalidatePath("/dashboard/invoices");
 }
 
+export async function getInvoice(id: number): Promise<InvoiceFormData> {
+  const data = await sql`
+    SELECT 
+      invoices.id, 
+      customers.name AS customer_name, 
+      invoices.amount, 
+      invoices.status, 
+      invoices.date 
+    FROM invoices
+    JOIN customers ON invoices.customer_id = customers.id
+    WHERE invoices.id = ${id}
+  `;
+
+  return data[0] as InvoiceFormData;
+}
+
 export async function updateInvoices(
   id: number,
   data: {
-    customerId: string;
+    customerId: number;
     amount: number;
     status: string;
   },
 ) {
   const { customerId, amount, status } = data;
-  await sql`UPDATE invoices SET customer_id=${customerId},amount=${amount},status=${status} WHERE id=${id}`;
+
+  await sql`
+    UPDATE invoices 
+    SET 
+      customer_id = ${Number(customerId)}, 
+      amount = ${Number(amount)}, 
+      status = ${status} 
+    WHERE id = ${id}
+  `;
+
   revalidatePath("/dashboard/invoices");
 }
 
 export async function deletedInvoice(id: number) {
-  await sql`DELETED FROM invoices WHERE id=${id}`;
+  await sql`DELETE FROM invoices WHERE id=${id}`;
   revalidatePath("/dashboard/invoices");
 }
