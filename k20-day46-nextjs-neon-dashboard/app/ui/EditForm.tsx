@@ -10,7 +10,7 @@ import {
   Switch,
   theme,
 } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
 import { Customers, InvoiceFormData } from "../data";
@@ -30,6 +30,7 @@ function EditInvoiceForm({
 }) {
   const [form] = Form.useForm<FormValues>();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { message } = App.useApp();
 
   const zodRule = (fieldName: keyof typeof schemaForm.shape) => ({
@@ -44,6 +45,7 @@ function EditInvoiceForm({
 
   const handleUpdate = async (values: FormValues) => {
     try {
+      setIsLoading(true);
       const payload = {
         customerId: values.customerId,
         amount: values.amount,
@@ -53,6 +55,7 @@ function EditInvoiceForm({
       await updateInvoices(invoice.id, payload);
       message.success("Cập nhật hóa đơn thành công!");
       router.push("/dashboard/invoices");
+      setIsLoading(false);
       router.refresh();
     } catch (error) {
       message.error("Có lỗi xảy ra khi cập nhật!");
@@ -104,7 +107,7 @@ function EditInvoiceForm({
       </Form.Item>
 
       <Form.Item>
-        <Button type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit" loading={isLoading}>
           Lưu thay đổi
         </Button>
       </Form.Item>

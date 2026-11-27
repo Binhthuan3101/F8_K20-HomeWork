@@ -42,6 +42,7 @@ function InvoiceForm({ customers }: { customers: Customers[] }) {
       await createInvoice(values);
       message.success("Thêm hóa đơn thành công!");
       router.push("/dashboard/invoices");
+      setLoading(false);
     } catch (error) {
       message.error("Lỗi khi thêm hóa đơn!");
       console.error("Lỗi khi tạo hóa đơn:", error);
