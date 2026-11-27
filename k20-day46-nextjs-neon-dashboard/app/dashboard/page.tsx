@@ -4,11 +4,14 @@ import LatestInvoicesTable from "../ui/LatestInvoicesTable";
 import { Suspense } from "react";
 
 async function LatestInvoicesSection() {
-    const latestInvoices = await fetchLatestInvoice();
-    console.log(latestInvoices);
-    
+  const latestInvoices = await fetchLatestInvoice();
+  console.log(latestInvoices);
+
   return <LatestInvoicesTable invoices={latestInvoices} />;
 }
+
+export const dynamic = "force-dynamic";
+
 export default async function DashboardPage() {
   return (
     <div>

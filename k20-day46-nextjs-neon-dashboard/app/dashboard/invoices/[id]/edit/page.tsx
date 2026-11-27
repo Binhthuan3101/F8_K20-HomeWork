@@ -3,6 +3,8 @@ import { fetchCustomers } from "@/app/data";
 import EditForm from "@/app/ui/EditForm";
 import React from "react";
 
+export const dynamic = 'force-dynamic';
+
 export default async function EditPage({
   params,
 }: {
