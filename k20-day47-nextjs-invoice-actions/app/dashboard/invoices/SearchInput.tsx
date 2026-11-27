@@ -22,7 +22,7 @@ export default function SearchInput({
     } else {
       params.delete("search");
     }
-    replace(`${pathname}/${params.toString()}`);
+    replace(`${pathname}?${params.toString()}`);
   }, 300);
 
   return (
