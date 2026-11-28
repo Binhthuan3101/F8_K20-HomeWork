@@ -14,7 +14,6 @@ export default async function CreateInvoicePage() {
         customers={customers}
         action={createInvoice}
         submitLabel="Tạo"
-        key={"tao"}
       />
     </section>
   );
