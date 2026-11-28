@@ -104,7 +104,7 @@ export async function updateInvoice(
   prevState: State,
   formData: FormData,
 ): Promise<State> {
-  const validId = InvoiceIdSchema.safeParse(id);
+  const validId = InvoiceIdSchema.parse(id);
 
   if (!validId) {
     return { message: "ID hóa đơn không hợp lệ." };
