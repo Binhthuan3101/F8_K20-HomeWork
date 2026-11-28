@@ -31,7 +31,7 @@ export default function SearchInput({
       allowClear
       defaultValue={initialSearch}
       onChange={(e) => handleSearch(e.target.value)}
-      placeholder="Tìm theo tên khách hàng..." 
+      placeholder="Tìm theo tên khách hàng..."
     />
   );
 }
