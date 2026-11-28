@@ -79,8 +79,12 @@ export default async function InvoicesPage({
 
   return (
     <section className="space-y-4">
-      <div className="flex items-center justify-between gap-4">
+      <div >
         <h1 className="text-2xl font-bold">Hóa đơn</h1>
+      </div>
+
+      <div className="flex gap-3 items-center justify-center">
+        <SearchInput initialSearch={search} />
         <Link
           href="/dashboard/invoices/create"
           className="rounded-md bg-yellow-600 px-4 py-2 text-sm font-medium text-white hover:bg-yellow-500 whitespace-nowrap"
@@ -88,8 +92,6 @@ export default async function InvoicesPage({
           Tạo hóa đơn
         </Link>
       </div>
-
-      <SearchInput initialSearch={search} />
 
       <Suspense
         fallback={
